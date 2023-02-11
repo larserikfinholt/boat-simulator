@@ -2,7 +2,7 @@ import pygame
 import math
 import numpy as np
 
-WIDTH = 800
+WIDTH = 1000
 HEIGHT = 600
 
 pygame.init()
@@ -135,7 +135,7 @@ def read_engine_levels_from_file():
     # Format <level_left_engine>,<level_right_engine>
     # Example: max speed forward on both engine: 10,10
     # Example: max turn (clockwise) 10,-10
-    file_name="output_engine_levels.txt"
+    file_name="set_engine_levels.txt"
     with open(file_name, 'r') as f:
         line = f.readline()
         x, y = map(int, line.strip().split(','))
@@ -148,7 +148,7 @@ def write_updated_position(boat_position):
         f.write(f"{boat_position[0]},{boat_position[1]}\n")
 
 # Write updated direction (angle) to a file
-def write_updated_position(boat_angle):
+def write_updated_angle(boat_angle):
     file_name = "sensor_angle.txt"
     with open(file_name, 'w') as f:
         f.write(f"{boat_angle}\n")
@@ -200,7 +200,14 @@ while running:
         boat_center_velocity = np.array([0,0])
         wind_velocity = np.array([0,0])
         engines_speed_level = np.array([0,0])
-    
+
+    # Fix angle
+    boat_direction_angle=boat_direction_angle % 360
+
+    # Write values to files, so that they are availible for read in "sensors"
+    write_updated_position(boat_position)
+    write_updated_angle(boat_direction_angle)
+
     # Part 2: Draw the boat on the screen
 
     # Rotate the image...
@@ -216,11 +223,12 @@ while running:
     # Draw the boat again at new pos
     screen.blit(rotated_boat, rotated_rect)
     # Draw text
-    draw_text_on_screen(screen, "position", boat_position,0)
-    draw_text_on_screen(screen, "angle", boat_direction_angle,1)
-    draw_text_on_screen(screen, "velocity", boat_center_velocity,2)
-    draw_text_on_screen(screen, "wind ", wind_velocity,3)
-    draw_text_on_screen(screen, "wind (effective)", wind,4)
+    draw_text_on_screen(screen, "engines", engines_speed_level,0)
+    draw_text_on_screen(screen, "position", boat_position,1)
+    draw_text_on_screen(screen, "angle", boat_direction_angle,2)
+    draw_text_on_screen(screen, "velocity", boat_center_velocity,3)
+    draw_text_on_screen(screen, "wind ", wind_velocity,4)
+    draw_text_on_screen(screen, "wind (effective)", wind,5)
 
     # Update display
     pygame.display.update()
