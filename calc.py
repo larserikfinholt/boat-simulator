@@ -91,6 +91,17 @@ def calc_updated_position(current_pos, velocity, delta_v):
     distance = velocity*delta_t
     return current_pos + distance
 
+def print_values(engine, wind, friction, total_force, turn, boat_center_velocity, new_velocity, boat_direction_angle, new_angle, boat_position):
+    vals = np.array([engine, wind, friction, total_force, turn, boat_center_velocity, new_velocity, boat_direction_angle, new_angle, boat_position])
+    s = ""
+    for val in vals:
+        if not isinstance(val,np.ndarray):
+            s+=  "{:.1f}".format(val) +","
+        else:
+            s += "({:.1f}, {:.1f}), ".format(val[0], val[1])
+    
+    print(s)
+
 
 delta_t = 0.1
 
@@ -110,16 +121,7 @@ while True:
 
     new_pos = calc_updated_position(boat_position, new_velocity, delta_t)
 
-    vals = np.array([engine, wind, friction, total_force, turn, boat_center_velocity, new_velocity, boat_direction_angle, new_angle, boat_position])
-
-    s = ""
-    for val in vals:
-        if not isinstance(val,np.ndarray):
-            s+=  "{:.1f}".format(val) +","
-        else:
-            s += "({:.1f}, {:.1f}), ".format(val[0], val[1])
-    
-    print(s)
+    print_values(engine, wind, friction, total_force, turn, boat_center_velocity, new_velocity, boat_direction_angle, new_angle, boat_position)
 
     boat_center_velocity = new_velocity
     boat_direction_angle = new_angle

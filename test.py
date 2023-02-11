@@ -63,11 +63,11 @@ def draw_vector(screen, name, vector, pos):
 
     
     font = pygame.font.Font(None, 12)
-    tekst = name + "["+ str(vector[0]) + "," + str(vector[1]) + "]"
-    text = font.render(tekst, True, (0, 0, 0))
-    screen.blit(text, pos0-[0,40])
+    #tekst = name + "["+ str(vector[0]) + "," + str(vector[1]) + "]"
+#|    text = font.render(tekst, True, (0, 0, 0))
+ #   screen.blit(text, pos0-[0,40])
 
-    pygame.draw.line(screen, (0, 0, 0),start_pos= pos0,end_pos= pos0 + np.dot(3, vector) , width= 3)
+  #  pygame.draw.line(screen, (0, 0, 0),start_pos= pos0,end_pos= pos0 + np.dot(3, vector) , width= 3)
 
 
 
