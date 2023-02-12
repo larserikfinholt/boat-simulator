@@ -1,6 +1,7 @@
 import time
-import coolsim as cs
+import simulator.coolsim as cs
 
+cs.init(targets=[[10,10],[100,100]])
 # # Hjelpefunksjon for å printe ut info om båten
 # def print_boat_position():
 #     # Hent posisjonen til båten
