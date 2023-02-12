@@ -1,28 +1,29 @@
 import time
 import simulator.coolsim as cs
 
-cs.init(targets=[[10,10],[100,100]])
-# # Hjelpefunksjon for å printe ut info om båten
-# def print_boat_position():
-#     # Hent posisjonen til båten
-#     boat_position = cs.get_position()
-#     # Hent ut retingen til båten
-#     boat_direction = cs.get_direction()
-#     # Print ut info om hvor båten er og hvilken retning den peker
-#     print("gps position:", boat_position)
-#     print("compass direction:", boat_direction)
-    
+cs.init(show_tail=1, screen_size=[400,600], targets=[[350,550]])
 
-# Skriv ut posisjonen når vi starter
-# print_boat_position()
-# Sett begge motorene til å gå framover
-cs.set_engine_levels(6,6)
-# la de gå i 5 sekunder
-time.sleep(5)
+for i in range (5):
+    # Sett begge motorene til å gå framover
+    cs.set_engine_levels(10,10)
+    # la de gå i 5 sekunder
+    time.sleep(5)
+    # sving
+    cs.set_engine_levels(0,6)
+    # ...en liten stund
+    time.sleep(3)
+    cs.set_engine_levels(10,10)
+    # la de gå i 5 sekunder
+    time.sleep(5)
+
 # stop begge motorene
 cs.set_engine_levels(0,0)
-# Skriv ut posisionen når vi er ferdige
-# print_boat_position()
 
+# finn ut hvor båten er
+boat_position = cs.get_position()
+boat_direction = cs.get_direction()
+
+# skriv ut hvor båten er
+print("Compass:" +str(boat_direction) + " Position:" + str(boat_position[0]) + "," + str(boat_position[1]))
 
 

@@ -1,5 +1,4 @@
-screen_size:300,400
+screen_size:400,600
 max_wind:0
 show_tail:1
-target:10,10
-target:100,100
+target:350,550
