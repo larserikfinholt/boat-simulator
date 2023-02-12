@@ -41,7 +41,7 @@ wind_velocity = np.array([0,0])
 # [0,0] is off, [10,10] is max forward, [-10,-10] is max backward, [1,1] is both engines running slowly
 engines_speed_level = np.array([0,0])
 # All positions (to be used when drawing the tail)
-all_positions = []
+all_positions = [boat_position]
 
 # Convert the levels into force
 def get_engine_force(levels):
@@ -149,14 +149,16 @@ def draw_text_on_screen(screen, name, vector, number):
 
 def draw_tail():
     if (show_tail):
-        p1 = p[0]
+        offset = np.array([0,25])
+        p1 = [all_positions[0][0]+25, all_positions[0][1]]
         for p in all_positions:
-            pygame.draw.line(screen, (0, 0, 0),start_pos= p1,end_pos= p , width= 1)
+            p = [p[0]+25,p[1]] #+offset
+            pygame.draw.line(screen, (180, 180, 180),start_pos= p1,end_pos= p , width= 1)
             p1=p
 
 def draw_targets():
     for t in targets:
-        pygame.draw.circle(screen, (255,0,0), t)
+        pygame.draw.circle(screen, (255,0,0), t, 10, 3)
 
 # Read the speed of the engines 
 def read_engine_levels_from_file():
@@ -229,6 +231,7 @@ while running:
         boat_center_velocity = np.array([0,0])
         wind_velocity = np.array([0,0])
         engines_speed_level = np.array([0,0])
+        all_positions = [boat_position]
 
     # Fix angle
     boat_direction_angle=boat_direction_angle % 360
@@ -247,10 +250,11 @@ while running:
     boat_rect.y = boat_position[1]
     rotated_rect.center = boat_rect.center
 
+    
     all_positions.append(boat_position)
 
     ## Draw everything white (removes old boat)    
-    screen.fill((255, 255, 255))
+    screen.fill((100, 200, 255))
     # Draw the boat again at new pos
     screen.blit(rotated_boat, rotated_rect)
     # Draw text
