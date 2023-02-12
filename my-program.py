@@ -1,6 +1,10 @@
 import time
 import simulator.coolsim as cs
 
+# Konfigurer simulatoren (bestem hvordan den skal virke)
+# show_tail - viser en hale etter båten
+# screen_size - størrelsen på "havet". I pixler.
+# targets - en liste med posisjoner som blir tegnet med en rød running. - dette kan f.eks være steder du skal navigere til
 cs.init(show_tail=1, screen_size=[400,600], targets=[[350,550]])
 
 for i in range (5):

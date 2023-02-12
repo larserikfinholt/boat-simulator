@@ -147,12 +147,17 @@ def draw_text_on_screen(screen, name, vector, number):
     text = font.render(toPrint, True, (0, 0, 0))
     screen.blit(text, pos0-[0,40])
 
-def draw_tail():
+def draw_tail(pos):
     if (show_tail):
-        offset = np.array([0,25])
-        p1 = [all_positions[0][0]+25, all_positions[0][1]]
+        prev = all_positions[-1]
+
+        if (abs(pos[0]-prev[0])> 5 or abs(pos[1]-prev[1]) > 5):
+            all_positions.append(pos)
+
+        offset = 25
+        p1 = [all_positions[0][0]+offset, all_positions[0][1]]
         for p in all_positions:
-            p = [p[0]+25,p[1]] #+offset
+            p = [p[0]+offset,p[1]] 
             pygame.draw.line(screen, (180, 180, 180),start_pos= p1,end_pos= p , width= 1)
             p1=p
 
@@ -250,9 +255,7 @@ while running:
     boat_rect.y = boat_position[1]
     rotated_rect.center = boat_rect.center
 
-    
-    all_positions.append(boat_position)
-
+  
     ## Draw everything white (removes old boat)    
     screen.fill((100, 200, 255))
     # Draw the boat again at new pos
@@ -264,7 +267,7 @@ while running:
     draw_text_on_screen(screen, "velocity", boat_center_velocity,3)
     draw_text_on_screen(screen, "wind ", wind_velocity,4)
     draw_text_on_screen(screen, "wind (effective)", wind,5)
-    draw_tail()
+    draw_tail(boat_position)
     draw_targets()
 
     # Update display
