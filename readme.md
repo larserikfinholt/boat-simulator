@@ -25,7 +25,7 @@ Dette er en simlator som du kan styre. Når starter simulatoren åpnes følgende
 
 # Slik kan du styre båten med kode
 Først må du inkludere et bibliotek som snakker med simulatoren. Biblioteket er en fil som heter `coolsim.py`. Dette er hvordan du kan starte begge motorene
-```
+```python
 import simulator.coolsim as cs
 
 # Sett begge motorene til å gå framover - hastighet 3  (10 er full fart. 1 er sakte. -10 er full fart bakover)
@@ -49,7 +49,7 @@ Koden over vil få båten til å gå rett fram i 5 sekunder, deretter svinger de
 ## Init fila
 Init funksjonen kan du gjøre litt forskjellig med:
 
-```
+```python
 # Konfigurer simulatoren (bestem hvordan den skal virke)
 # show_tail - viser en hale etter båten
 # screen_size - størrelsen på "havet". I pixler.
@@ -63,10 +63,11 @@ cs.init(show_tail=1, screen_size=[400,600], targets=[[350,550]])
 ## Sensorer
 For å navigere må du vite hvor du er. Derfor trenger vi sensorer. Simulatoren simulerer to "sensorer", kompass og GPS
 
-```
+```python
 # Finn ut posisjonen til båten. (simulerer en GPS)
 # Denne returner en [x,y] som referer til vindus størrelsen som ble satt opp i init kallet
 boat_position = cs.get_position()
+
 # Finn retningen til båten. (simulerer et kompass)
 # Denne returner antall grader. 0 er nord, 180 er sør.
 boat_direction = cs.get_direction()
