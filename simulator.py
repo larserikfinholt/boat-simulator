@@ -2,7 +2,7 @@ import pygame
 import math
 import numpy as np
 
-WIDTH = 1000
+WIDTH = 400
 HEIGHT = 600
 
 pygame.init()
@@ -186,7 +186,7 @@ while running:
     # Calculete the new position
     new_pos = calc_updated_position(boat_position, new_velocity, delta_t)
 
-    print_values(engine, wind, friction, total_force, turn, boat_center_velocity, new_velocity, boat_direction_angle, new_angle, boat_position)
+    #print_values(engine, wind, friction, total_force, turn, boat_center_velocity, new_velocity, boat_direction_angle, new_angle, boat_position)
 
     # Set the new positions
     boat_center_velocity = new_velocity
